@@ -1,10 +1,22 @@
-import React from 'react';
+import React from "react";
 
-export default function Checkbox() {
-    return (
-        <div>
-            Checkbox
-        </div>
-    );
+export default function Checkbox({
+  disabled = false,
+  checked = false,
+  label,
+  onChange,
+  ...restProps
+}) {
+  return (
+    <label style={{fontSize: '1.4rem'}}>
+      <input
+        type="checkbox"
+        checked={checked}
+        disabled={disabled}
+        onChange={onChange}
+        {...restProps}
+      />{" "}
+      {label}
+    </label>
+  );
 }
-

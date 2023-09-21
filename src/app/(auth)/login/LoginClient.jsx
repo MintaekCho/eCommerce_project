@@ -6,6 +6,8 @@ import { useRouter } from "next/navigation";
 import styles from "./Auth.module.scss";
 import Loader from "@/components/loader/Loader";
 import Input from "@/components/input/Input";
+import AutoSighInCheckbox from "@/components/autoSighInCheckbox/AutoSighInCheckbox";
+import Divider from "@/components/divider/Divider";
 
 export default function LoginClient() {
   const [email, setEmail] = useState("");
@@ -40,7 +42,7 @@ export default function LoginClient() {
             {/* input */}
             <Input
               email
-              icon='letter'
+              icon="letter"
               id="email"
               name="email"
               label="이메일"
@@ -51,7 +53,7 @@ export default function LoginClient() {
             />
             <Input
               password
-              icon='lock'
+              icon="lock"
               id="password"
               name="password"
               label="비밀번호"
@@ -61,11 +63,18 @@ export default function LoginClient() {
               onchange={(e) => setPassword(e.target.value)}
             />
             <div className={styles.group}>
-              자동로그인, 비밀번호 수정
+              {/* 자동로그인, 비밀번호 수정 */}
+              <AutoSighInCheckbox
+                checked={isAutoLogin}
+                onChange={(e) => setIsAutoLogin(e.target.checked)}
+              />
             </div>
             <div className={styles.buttonGroup}>
               Button
               <div>Button</div>
+              <Divider />
+              Button
+              <Divider />
             </div>
           </form>
         </div>
