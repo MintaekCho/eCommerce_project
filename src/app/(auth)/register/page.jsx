@@ -1,10 +1,5 @@
-import React from 'react';
+import RegisterClient from "./RegisterClient";
 
 export default function Register() {
-    return (
-        <div>
-            Register
-        </div>
-    );
+  return <RegisterClient />;
 }
-

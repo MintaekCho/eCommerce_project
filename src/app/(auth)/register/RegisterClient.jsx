@@ -1,34 +1,26 @@
 "use client";
-import React, { useState } from "react";
-import LogoPath from "@/assets/colorful.svg";
-import Image from "next/image";
-import { useRouter } from "next/navigation";
-import styles from "./Auth.module.scss";
 import Loader from "@/components/loader/Loader";
+import { useRouter } from "next/navigation";
+import styles from "../login/Auth.module.scss";
+import React, { useState } from "react";
+import Image from "next/image";
 import Input from "@/components/input/Input";
-import AutoSighInCheckbox from "@/components/autoSighInCheckbox/AutoSighInCheckbox";
 import Divider from "@/components/divider/Divider";
 import Button from "@/components/button/Button";
 import Link from "next/link";
+import LogoPath from "@/assets/colorful.svg";
 
-export default function LoginClient() {
+export default function RegisterClient() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [cPassword, setCPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [isAutoLogin, setIsAutoLogin] = useState(false); // 자동로그인 상태
 
   const router = useRouter();
-  const redirectUser = () => {
-    router.push("/");
-  };
 
-  const loginUser = (e) => {
+  const registerUser = (e) => {
     e.preventDefault();
     setIsLoading(true);
-  };
-
-  const signInWithGoogle = () => {
-    // firebase 구글로그인 로직
   };
 
   return (
@@ -36,11 +28,13 @@ export default function LoginClient() {
       {isLoading && <Loader />}
       <section className={styles.page}>
         <div className={styles.container}>
-          <h1 className={styles.logo}>
-            <Image priority src={LogoPath} alt="logo" />
-          </h1>
+          <Link href={"/"}>
+            <h1 className={styles.logo}>
+              <Image priority src={LogoPath} alt="logo" />
+            </h1>
+          </Link>
 
-          <form onSubmit={loginUser} className={styles.form}>
+          <form onSubmit={registerUser} className={styles.form}>
             {/* input */}
             <Input
               email
@@ -64,28 +58,28 @@ export default function LoginClient() {
               value={password}
               onchange={(e) => setPassword(e.target.value)}
             />
-            <div className={styles.group}>
-              {/* 자동로그인, 비밀번호 수정 */}
-              <AutoSighInCheckbox
-                checked={isAutoLogin}
-                onChange={(e) => setIsAutoLogin(e.target.checked)}
-              />
-            </div>
+            <Input
+              password
+              icon="lock"
+              id="password"
+              name="password"
+              label="비밀번호 확인"
+              placeholder="비밀번호 확인"
+              className={styles.control}
+              value={cPassword}
+              onchange={(e) => setCPassword(e.target.value)}
+            />
             <div className={styles.buttonGroup}>
               <Button type="submit" width="100%">
-                로그인
+                회원가입
               </Button>
               <Divider />
-              <Link href={"/register"}>
+              <Link href={"/login"}>
                 <Button width="100%" secondary>
-                  회원가입
+                  로그인
                 </Button>
               </Link>
-
               <Divider />
-              <div>
-                <Button onClick={signInWithGoogle}>구글 로그인</Button>
-              </div>
             </div>
           </form>
         </div>
